@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>kExamHub | Professional Korean Examination Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2f27ce;
+            --secondary: #dddbff;
+            --dark-text: #050316;
+            --light-bg: #fbfbfe;
+            --on-primary: #fbfbfe;
+            --surface-low: #f5f5f8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Noto Sans KR', sans-serif; }
+        body { background-color: var(--light-bg); color: var(--dark-text); line-height: 1.4; -webkit-font-smoothing: antialiased; }
+
+        /* MINIMAL NAV */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 40px 8%; background: transparent;
+        }
+        .logo { font-size: 1.6rem; font-weight: 900; color: var(--primary); letter-spacing: -1.5px; }
+
+        .play-store-tag {
+            font-weight: 700; font-size: 0.7rem; letter-spacing: 1px; 
+            opacity: 0.8; text-transform: uppercase; color: var(--primary);
+        }
+
+        /* HERO SECTION */
+        .hero { padding: 80px 8% 120px; }
+        .hero h1 { 
+            font-size: clamp(3rem, 8vw, 5.5rem); 
+            font-weight: 900; line-height: 0.9; 
+            letter-spacing: -4px; margin-bottom: 30px; 
+        }
+        .hero p { font-size: 1.3rem; max-width: 550px; opacity: 0.8; margin-bottom: 40px; }
+
+        .btn {
+            padding: 20px 45px; border-radius: 32px; text-decoration: none;
+            font-weight: 700; font-size: 0.9rem; display: inline-block;
+            transition: 0.2s ease-in-out; border: none; cursor: pointer;
+        }
+        .btn-primary { background: var(--primary); color: var(--on-primary); }
+
+        /* CONTENT GRID */
+        .content-grid {
+            padding: 100px 8%;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 120px 80px;
+            border-top: 1px solid var(--secondary);
+        }
+
+        .item h2 { 
+            font-size: 2.2rem; font-weight: 800; color: var(--primary); 
+            letter-spacing: -1.5px; margin-bottom: 15px; line-height: 1.1;
+        }
+        .item p { font-size: 1.1rem; opacity: 0.7; max-width: 420px; }
+
+        /* FEEDBACK BANNER */
+        .feedback-banner {
+            background: var(--secondary);
+            padding: 100px 8%;
+        }
+        .feedback-banner h2 { font-size: 3rem; font-weight: 900; letter-spacing: -2px; margin-bottom: 20px; }
+
+        /* FOOTER */
+        footer {
+            padding: 80px 8%;
+            background: var(--dark-text);
+            color: var(--light-bg);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 3.5rem; }
+            .content-grid { grid-template-columns: 1fr; gap: 60px; }
+            footer { flex-direction: column; align-items: flex-start; gap: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">kExamHub</div>
+        <div class="play-store-tag">Coming soon to Google Play Store</div>
+    </nav>
+
+    <header class="hero">
+        <h1>Fresh Tests.<br>Every Single Day.</h1>
+        <p>A living examination ecosystem. kExamHub connects candidates with real-time teacher updates, digital resources, and expert performance feedback.</p>
+        <a href="#notify" class="btn btn-primary">JOIN THE WAITLIST</a>
+    </header>
+
+    <main class="content-grid">
+        <div class="item">
+            <h2>Real-time<br>Daily Updates.</h2>
+            <p>Our teachers publish fresh examinations daily. Practice with the most current EPS TOPIK and UBT questions, moving far beyond static textbook banks.</p>
+        </div>
+
+        <div class="item">
+            <h2>Dynamic<br>Review System.</h2>
+            <p>Direct candidate feedback loops allow you to understand your mistakes. Receive expert insights into your performance to sharpen your exam strategy.</p>
+        </div>
+
+        <div class="item">
+            <h2>Resource<br>Integration.</h2>
+            <p>Bridge the gap with integrated textbook modules and specialized vocabulary tests. Focused training for Manufacturing, Agriculture, and Construction sectors.</p>
+        </div>
+
+        <div class="item">
+            <h2>Offline-First<br>Reliability.</h2>
+            <p>Engineered for high-performance syncing. Load your resources once and maintain access to every test, audio file, and book without an active connection.</p>
+        </div>
+    </main>
+
+    <section class="feedback-banner" id="notify">
+        <div style="max-width: 800px;">
+            <h2>Interactive Excellence.</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 40px; opacity: 0.8;">Verified members unlock direct teacher interaction and exclusive mock tests. Be the first to know when we launch on the Play Store.</p>
+            
+            <form style="display: flex; gap: 0; max-width: 450px; background: white; padding: 5px; border-radius: 40px;">
+                <input type="email" placeholder="Email address" style="flex:1; border:none; padding:10px 25px; outline:none; border-radius:40px; font-weight:600;">
+                <button type="button" class="btn btn-primary" style="padding:15px 30px;">NOTIFY ME</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div>
+            <div class="logo" style="color: white; margin-bottom: 20px;">kExamHub</div>
+            <p style="opacity: 0.5; font-size: 0.8rem; max-width: 300px;">The Professional Examination Hub for Korean Language Aspirants.</p>
+        </div>
+        <div style="text-align: right;">
+            <p style="font-weight: 800; font-size: 1.2rem;">Ready for 2026.</p>
+            <p style="opacity: 0.5; font-size: 0.8rem;">EPS TOPIK &bull; UBT &bull; CBT &bull; TOPIK</p>
+        </div>
+    </footer>
+
+</body>
+</html>
