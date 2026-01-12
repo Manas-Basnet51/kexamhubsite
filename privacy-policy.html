@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | kExamHub</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2f27ce;
+            --secondary: #dddbff;
+            --dark-text: #050316;
+            --light-bg: #fbfbfe;
+            --on-primary: #fbfbfe;
+            --surface-low: #f5f5f8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Noto Sans KR', sans-serif; }
+        body { background-color: var(--light-bg); color: var(--dark-text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+        /* MINIMAL NAV */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 40px 8%; background: transparent;
+        }
+        .logo { font-size: 1.6rem; font-weight: 900; color: var(--primary); letter-spacing: -1.5px; text-decoration: none; }
+
+        .nav-link {
+            font-weight: 600; font-size: 0.9rem;
+            color: var(--dark-text); opacity: 0.7; text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        .nav-link:hover { opacity: 1; }
+
+        /* HERO SECTION */
+        .hero {
+            padding: 80px 8% 60px;
+            border-bottom: 1px solid var(--secondary);
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900; line-height: 1;
+            letter-spacing: -3px; margin-bottom: 20px;
+        }
+        .hero p { font-size: 1.1rem; max-width: 650px; opacity: 0.7; }
+        .last-updated {
+            font-size: 0.85rem; opacity: 0.5; margin-top: 15px; font-weight: 600;
+        }
+
+        /* CONTENT SECTION */
+        .content {
+            padding: 80px 8%;
+            max-width: 1000px;
+        }
+
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section h2 {
+            font-size: 2rem; font-weight: 800; color: var(--primary);
+            letter-spacing: -1.5px; margin-bottom: 20px; line-height: 1.2;
+        }
+
+        .section h3 {
+            font-size: 1.4rem; font-weight: 700; color: var(--dark-text);
+            margin-top: 30px; margin-bottom: 15px; letter-spacing: -0.5px;
+        }
+
+        .section p {
+            font-size: 1.05rem; opacity: 0.8; margin-bottom: 15px;
+        }
+
+        .section ul, .section ol {
+            margin-left: 25px; margin-bottom: 20px;
+        }
+
+        .section li {
+            font-size: 1.05rem; opacity: 0.8; margin-bottom: 10px;
+        }
+
+        .section strong {
+            font-weight: 700; color: var(--dark-text); opacity: 1;
+        }
+
+        .highlight-box {
+            background: var(--secondary);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 25px 0;
+        }
+
+        .highlight-box p {
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        .contact-box {
+            background: var(--surface-low);
+            padding: 35px;
+            border-radius: 12px;
+            margin-top: 40px;
+        }
+
+        .contact-box h3 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+
+        .contact-box a {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .contact-box a:hover {
+            text-decoration: underline;
+        }
+
+        /* TABLE STYLING */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            font-size: 1rem;
+        }
+
+        th {
+            background: var(--secondary);
+            padding: 15px;
+            text-align: left;
+            font-weight: 700;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid var(--secondary);
+            opacity: 0.8;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 80px 8%;
+            background: var(--dark-text);
+            color: var(--light-bg);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 2.5rem; }
+            .content { padding: 60px 8%; }
+            footer { flex-direction: column; align-items: flex-start; gap: 40px; }
+            table { font-size: 0.9rem; }
+            th, td { padding: 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">kExamHub</a>
+        <a href="index.html" class="nav-link">Back to Home</a>
+    </nav>
+
+    <header class="hero">
+        <h1>Privacy Policy</h1>
+        <p>How kExamHub collects, uses, and protects your personal information.</p>
+        <p class="last-updated">Last Updated: January 12, 2025</p>
+    </header>
+
+    <main class="content">
+
+        <section class="section">
+            <h2>Introduction</h2>
+            <p>Welcome to kExamHub. This Privacy Policy explains how kExamHub Team ("we", "us", or "our") collects, uses, shares, and protects your personal information when you use the kExamHub mobile application (the "App").</p>
+            <p>By using kExamHub, you agree to the collection and use of information in accordance with this policy. If you do not agree with our policies and practices, please do not use the App.</p>
+
+            <div class="highlight-box">
+                <p><strong>Age Requirement:</strong> kExamHub is intended for users aged 13 and above. We do not knowingly collect personal information from children under 13. If you are under 13, please do not use this App or provide any personal information.</p>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Information We Collect</h2>
+            <p>We collect several types of information to provide and improve our services:</p>
+
+            <h3>1. Information You Provide Directly</h3>
+            <p>When you create an account and use kExamHub, we collect:</p>
+            <ul>
+                <li><strong>Account Information:</strong> Full name, email address, password (securely encrypted)</li>
+                <li><strong>Profile Information:</strong> Profile picture (optional), mobile number (optional), Korean language proficiency level (beginner to expert)</li>
+                <li><strong>Language Preference:</strong> Your selected app language (Korean, English, or Nepali)</li>
+                <li><strong>Test Results:</strong> Your answers, scores, time taken, completion timestamps, and performance statistics</li>
+                <li><strong>Learning Progress:</strong> Completed tests count, average scores, test history</li>
+                <li><strong>Membership Data:</strong> Teacher-student relationships, invitation codes, subscription to content creators</li>
+                <li><strong>Content Creation:</strong> If you're a teacher, tests and books you create, including questions, answers, images, audio files, and PDFs</li>
+            </ul>
+
+            <h3>2. Information Collected Automatically</h3>
+            <p>When you use the App, we automatically collect:</p>
+            <ul>
+                <li><strong>Device Information:</strong> Device type (Android, iOS, Web), device ID, operating system version</li>
+                <li><strong>Usage Analytics:</strong> App features used, time spent on activities, crash reports, performance data (collected via Firebase Analytics)</li>
+                <li><strong>Notification Tokens:</strong> Firebase Cloud Messaging (FCM) tokens to send push notifications</li>
+                <li><strong>Authentication Data:</strong> Login timestamps, session tokens, IP addresses</li>
+            </ul>
+
+            <h3>3. OAuth Information</h3>
+            <p>If you sign in with Google, we collect:</p>
+            <ul>
+                <li>Name and email address from your Google account</li>
+                <li>Profile picture (if available)</li>
+                <li>Google account ID (for authentication purposes only)</li>
+            </ul>
+
+            <h3>4. Advertising Information</h3>
+            <p>To serve personalized advertisements, we and our advertising partners may collect:</p>
+            <ul>
+                <li>Advertising ID (Google Advertising ID on Android)</li>
+                <li>Ad interaction data (clicks, impressions, conversions)</li>
+                <li>Device and app usage patterns for ad targeting</li>
+            </ul>
+
+            <h3>5. Local Storage</h3>
+            <p>Some data is stored only on your device and never sent to our servers:</p>
+            <ul>
+                <li>Vocabulary practice test history and achievement unlocks</li>
+                <li>Cached media files (images, audio, PDFs) for offline access</li>
+                <li>App preferences and settings</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>How We Use Your Information</h2>
+            <p>We use the collected information for the following purposes:</p>
+            <ul>
+                <li><strong>Provide Services:</strong> Enable test-taking, vocabulary practice, book reading, live sessions, and all core App features</li>
+                <li><strong>Account Management:</strong> Create and manage your account, authenticate your identity, maintain security</li>
+                <li><strong>Personalization:</strong> Remember your language preference, track your learning progress, provide personalized recommendations</li>
+                <li><strong>Teacher-Student Interaction:</strong> Facilitate memberships, subscriptions, and live test sessions between teachers and students</li>
+                <li><strong>Notifications:</strong> Send push notifications about new tests, live sessions, teacher updates, and important announcements</li>
+                <li><strong>Analytics and Improvement:</strong> Analyze app usage patterns to improve features, fix bugs, and optimize performance</li>
+                <li><strong>Advertising:</strong> Display relevant advertisements and measure ad effectiveness to support our free services</li>
+                <li><strong>Security:</strong> Detect and prevent fraud, abuse, and security incidents</li>
+                <li><strong>Legal Compliance:</strong> Comply with legal obligations and enforce our Terms of Service</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Third-Party Services</h2>
+            <p>We use third-party services to operate kExamHub. These services have access to your information only to perform tasks on our behalf and are obligated not to disclose or use it for other purposes.</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Service</th>
+                        <th>Provider</th>
+                        <th>Purpose</th>
+                        <th>Data Shared</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Supabase</strong></td>
+                        <td>Supabase Inc.</td>
+                        <td>Backend database, authentication, file storage, real-time features</td>
+                        <td>All profile data, test results, content, authentication data</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Firebase Analytics</strong></td>
+                        <td>Google LLC</td>
+                        <td>App usage analytics and crash reporting</td>
+                        <td>Device info, usage patterns, app events, crash logs</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Firebase Cloud Messaging</strong></td>
+                        <td>Google LLC</td>
+                        <td>Push notifications</td>
+                        <td>Device tokens, notification content</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Google Sign-In</strong></td>
+                        <td>Google LLC</td>
+                        <td>OAuth authentication</td>
+                        <td>Name, email, profile picture from Google account</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Advertising Networks</strong></td>
+                        <td>Various (e.g., Google AdMob)</td>
+                        <td>Display advertisements</td>
+                        <td>Advertising ID, device info, ad interaction data</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><strong>Data Location:</strong> Your data is primarily stored on Supabase servers located in the Asia Pacific region. Firebase services may store data in multiple regions globally according to Google's infrastructure.</p>
+
+            <h3>Third-Party Privacy Policies</h3>
+            <p>We encourage you to review the privacy policies of these third-party services:</p>
+            <ul>
+                <li>Supabase Privacy Policy: <a href="https://supabase.com/privacy" target="_blank" style="color: var(--primary);">https://supabase.com/privacy</a></li>
+                <li>Google Privacy Policy: <a href="https://policies.google.com/privacy" target="_blank" style="color: var(--primary);">https://policies.google.com/privacy</a></li>
+                <li>Google AdMob: <a href="https://support.google.com/admob/answer/6128543" target="_blank" style="color: var(--primary);">https://support.google.com/admob/answer/6128543</a></li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Data Sharing and Disclosure</h2>
+            <p><strong>We do NOT sell your personal information to third parties.</strong></p>
+
+            <h3>What We Share Within the App</h3>
+            <ul>
+                <li><strong>Public Profile:</strong> Your name and profile picture are visible to other users in the App</li>
+                <li><strong>Teacher Visibility:</strong> If you join a teacher's membership, they can see your name and subscription status</li>
+                <li><strong>Subscriber Lists:</strong> Content creators can see the list of users who subscribe to them</li>
+            </ul>
+
+            <h3>What Remains Private</h3>
+            <ul>
+                <li>Your email address, phone number, and password</li>
+                <li>Your test answers, scores, and performance details (only visible to you)</li>
+                <li>Your device information and analytics data</li>
+            </ul>
+
+            <h3>When We May Disclose Information</h3>
+            <p>We may disclose your information in the following circumstances:</p>
+            <ul>
+                <li><strong>With Your Consent:</strong> When you explicitly authorize us to share specific information</li>
+                <li><strong>Legal Requirements:</strong> To comply with laws, regulations, court orders, or government requests</li>
+                <li><strong>Safety and Security:</strong> To protect the rights, property, or safety of kExamHub, our users, or the public</li>
+                <li><strong>Business Transfers:</strong> In connection with a merger, acquisition, or sale of assets (users will be notified)</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Advertising and Analytics</h2>
+
+            <h3>Personalized Advertising</h3>
+            <p>kExamHub displays advertisements to support our free services. We and our advertising partners use your information to show relevant ads based on your interests and app usage.</p>
+
+            <h3>Opting Out of Personalized Ads</h3>
+            <p>You can opt out of personalized advertising:</p>
+            <ul>
+                <li><strong>Android:</strong> Go to Settings → Google → Ads → Opt out of Ads Personalization</li>
+                <li><strong>iOS:</strong> Go to Settings → Privacy → Advertising → Limit Ad Tracking</li>
+            </ul>
+            <p>Note: Opting out will not reduce the number of ads you see, but they may be less relevant to you.</p>
+
+            <h3>Analytics</h3>
+            <p>We use Firebase Analytics to understand how users interact with kExamHub. This helps us improve features and fix issues. Analytics data is anonymized and aggregated whenever possible.</p>
+        </section>
+
+        <section class="section">
+            <h2>App Permissions</h2>
+            <p>kExamHub requests the following permissions on your device. We only request permissions necessary for core App functionality:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Permission</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Camera</strong></td>
+                        <td>Upload profile pictures and content images</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Internet</strong></td>
+                        <td>Access backend services, download tests and books</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Storage (Read/Write)</strong></td>
+                        <td>Cache media files for offline access</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Media Access (Android 13+)</strong></td>
+                        <td>Select images, videos, and audio from your device</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Microphone</strong></td>
+                        <td>Record audio for content creation (teachers only)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Notifications</strong></td>
+                        <td>Send push notifications about new content and updates</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Network State</strong></td>
+                        <td>Detect online/offline status for sync management</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>You can manage permissions in your device settings at any time. Denying certain permissions may limit App functionality.</p>
+        </section>
+
+        <section class="section">
+            <h2>Data Storage and Retention</h2>
+
+            <h3>How Long We Keep Your Data</h3>
+            <ul>
+                <li><strong>Account Data:</strong> Retained indefinitely until you delete your account</li>
+                <li><strong>Test Results:</strong> Stored permanently for your learning history</li>
+                <li><strong>Notifications:</strong> Automatically deleted after 30 days</li>
+                <li><strong>Cached Media:</strong> Deleted from your device after 3 days of inactivity</li>
+                <li><strong>Session Tokens:</strong> Expire automatically; old tokens are cleaned periodically</li>
+            </ul>
+
+            <h3>Data Security</h3>
+            <p>We implement industry-standard security measures to protect your information:</p>
+            <ul>
+                <li><strong>Encryption:</strong> All data transmitted between your device and our servers is encrypted using HTTPS/TLS</li>
+                <li><strong>Password Security:</strong> Passwords are hashed and encrypted; we never store plain-text passwords</li>
+                <li><strong>Row-Level Security:</strong> Database policies ensure users can only access their own data</li>
+                <li><strong>Authentication:</strong> Secure session management with automatic token refresh</li>
+                <li><strong>Access Controls:</strong> Strict role-based access for teachers, students, and administrators</li>
+            </ul>
+            <p>While we strive to protect your information, no method of electronic storage or internet transmission is 100% secure. We cannot guarantee absolute security.</p>
+        </section>
+
+        <section class="section">
+            <h2>Your Privacy Rights</h2>
+            <p>You have the following rights regarding your personal information:</p>
+
+            <h3>1. Access Your Data</h3>
+            <p>You can view your profile information, test history, and learning progress within the App at any time.</p>
+
+            <h3>2. Update Your Information</h3>
+            <p>You can edit your profile details, change your email, update your password, and modify your language preference in App settings.</p>
+
+            <h3>3. Delete Your Account</h3>
+            <p>You can permanently delete your account through the App settings. This will:</p>
+            <ul>
+                <li>Remove your profile from our database</li>
+                <li>Delete your authentication credentials</li>
+                <li>Remove memberships and subscriptions</li>
+                <li>Clear notification tokens and session data</li>
+            </ul>
+            <p><strong>Note:</strong> Your test results may be preserved for statistical purposes (anonymized), and content you created (tests/books) will remain unless manually deleted before account deletion.</p>
+
+            <h3>4. Clear Local Cache</h3>
+            <p>You can clear cached media files (images, audio, PDFs) from your device at any time through the App's cache management feature.</p>
+
+            <h3>5. Withdraw Consent</h3>
+            <p>You can opt out of push notifications, personalized advertising, and certain data collection features through App settings or device settings.</p>
+
+            <h3>6. Data Portability</h3>
+            <p>You can request a copy of your personal data by contacting us at the email below. We will provide your data in a commonly used, machine-readable format.</p>
+
+            <h3>Additional Rights (GDPR/Regional Laws)</h3>
+            <p>Depending on your location, you may have additional rights such as:</p>
+            <ul>
+                <li>Right to object to processing</li>
+                <li>Right to restriction of processing</li>
+                <li>Right to lodge a complaint with a supervisory authority</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Children's Privacy</h2>
+            <p>kExamHub is designed for users aged 13 and above. We do not knowingly collect personal information from children under 13 years of age.</p>
+            <p>If you are a parent or guardian and believe your child under 13 has provided personal information to us, please contact us immediately at <a href="mailto:gingeeswork@gmail.com" style="color: var(--primary);">gingeeswork@gmail.com</a>. We will promptly delete such information from our systems.</p>
+        </section>
+
+        <section class="section">
+            <h2>International Data Transfers</h2>
+            <p>Your information may be transferred to and processed in countries other than your own. Our primary data storage is in the Asia Pacific region (Supabase), but third-party services like Firebase may process data globally.</p>
+            <p>We ensure that adequate safeguards are in place when transferring your data internationally, in accordance with applicable data protection laws.</p>
+        </section>
+
+        <section class="section">
+            <h2>Changes to This Privacy Policy</h2>
+            <p>We may update this Privacy Policy from time to time to reflect changes in our practices, technologies, legal requirements, or other factors.</p>
+            <p>When we make material changes, we will:</p>
+            <ul>
+                <li>Update the "Last Updated" date at the top of this policy</li>
+                <li>Notify you via push notification or email (if applicable)</li>
+                <li>Display a prominent notice in the App</li>
+            </ul>
+            <p>Your continued use of kExamHub after changes are posted constitutes your acceptance of the updated policy. We encourage you to review this Privacy Policy periodically.</p>
+        </section>
+
+        <section class="section">
+            <h2>Do Not Track</h2>
+            <p>Some browsers have a "Do Not Track" (DNT) feature that signals to websites that you do not want to be tracked. kExamHub does not currently respond to DNT signals, as there is no industry-wide standard for how to interpret them.</p>
+        </section>
+
+        <section class="section">
+            <h2>California Privacy Rights (CCPA)</h2>
+            <p>If you are a California resident, you have additional rights under the California Consumer Privacy Act (CCPA):</p>
+            <ul>
+                <li>Right to know what personal information is collected</li>
+                <li>Right to know if personal information is sold or disclosed (we do NOT sell your data)</li>
+                <li>Right to request deletion of personal information</li>
+                <li>Right to opt out of the sale of personal information (not applicable, as we don't sell)</li>
+                <li>Right to non-discrimination for exercising your rights</li>
+            </ul>
+            <p>To exercise these rights, contact us at <a href="mailto:gingeeswork@gmail.com" style="color: var(--primary);">gingeeswork@gmail.com</a>.</p>
+        </section>
+
+        <div class="contact-box">
+            <h3>Contact Us</h3>
+            <p>If you have questions, concerns, or requests regarding this Privacy Policy or your personal information, please contact us:</p>
+            <p style="margin-top: 20px;">
+                <strong>kExamHub Team</strong><br>
+                Email: <a href="mailto:gingeeswork@gmail.com">gingeeswork@gmail.com</a><br>
+                Website: <a href="https://kexamhub.com">kexamhub.com</a>
+            </p>
+            <p style="margin-top: 20px; font-size: 0.95rem; opacity: 0.7;">We aim to respond to all privacy-related inquiries within 30 days.</p>
+        </div>
+
+    </main>
+
+    <footer>
+        <div>
+            <a href="index.html" class="logo" style="color: white; margin-bottom: 20px; display: inline-block;">kExamHub</a>
+            <p style="opacity: 0.5; font-size: 0.8rem; max-width: 300px;">The Professional Examination Hub for Korean Language Aspirants.</p>
+        </div>
+        <div style="text-align: right;">
+            <p style="font-weight: 800; font-size: 1.2rem;">Your Privacy Matters.</p>
+            <p style="opacity: 0.5; font-size: 0.8rem;">Secure &bull; Transparent &bull; GDPR-Compliant</p>
+        </div>
+    </footer>
+
+</body>
+</html>
