@@ -145,5 +145,33 @@
         </div>
     </footer>
 
+    <script>
+        // Redirect to appropriate page based on URL parameters
+        (function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const code = urlParams.get('code');
+            const type = urlParams.get('type');
+            const hash = window.location.hash;
+
+            // If there's a code parameter, redirect to the appropriate page
+            if (code) {
+                // Determine which page to redirect to based on type
+                // Default to reset.html if type is not specified
+                let redirectPage = 'reset.html';
+
+                if (type === 'signup' || type === 'invite' || type === 'email') {
+                    redirectPage = 'verify.html';
+                } else if (type === 'recovery' || !type) {
+                    redirectPage = 'reset.html';
+                }
+
+                // Build the redirect URL with all parameters
+                const redirectUrl = redirectPage + window.location.search + hash;
+                console.log('Redirecting to:', redirectUrl);
+                window.location.href = redirectUrl;
+            }
+        })();
+    </script>
+
 </body>
 </html>
