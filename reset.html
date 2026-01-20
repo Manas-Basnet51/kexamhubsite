@@ -371,24 +371,19 @@
             });
         });
 
-        // Listen for auth state changes (for PKCE flow)
-        let authStateChecked = false;
+        // Listen for auth state changes
+        let formShown = false;
 
         supabaseClient.auth.onAuthStateChange((event, session) => {
             console.log('Auth state change:', { event, hasSession: !!session });
 
-            if (authStateChecked) return; // Only handle first state change
-            authStateChecked = true;
+            // Only show form once
+            if (formShown) return;
 
-            if (event === 'PASSWORD_RECOVERY') {
-                console.log('Password recovery event detected, showing form');
+            if (event === 'PASSWORD_RECOVERY' && session) {
+                console.log('Password recovery event with session - showing form');
+                formShown = true;
                 showForm();
-            } else if (session && event === 'SIGNED_IN') {
-                console.log('Signed in with recovery session, showing form');
-                showForm();
-            } else if (!session) {
-                console.error('No session after auth state change');
-                showError('The password reset link is invalid or has expired. Please request a new one.');
             }
         });
 
@@ -406,33 +401,32 @@
                     return;
                 }
 
-                // Check if we have the necessary parameters
-                const tokenHash = hashParams.get('access_token');
-                const type = hashParams.get('type');
+                console.log('Full URL hash:', window.location.hash);
+                console.log('Parsed hash params:', Object.fromEntries(hashParams.entries()));
 
-                console.log('URL parameters:', { hasTokenHash: !!tokenHash, type, tokenHashLength: tokenHash?.length });
+                // Wait for Supabase to process the token from URL and trigger auth state change
+                console.log('Waiting for auth state change...');
+                await new Promise(resolve => setTimeout(resolve, 3000));
 
-                if (!tokenHash || type !== 'recovery') {
-                    console.error('Missing parameters:', { hasTokenHash: !!tokenHash, type });
-                    showError('The password reset link is invalid. Please request a new password reset.');
-                    return;
-                }
-
-                // For PKCE flow, the onAuthStateChange listener will handle the session
-                // Wait for auth state to settle
-                console.log('Waiting for PKCE auth state to settle...');
-                await new Promise(resolve => setTimeout(resolve, 2000));
-
-                // Check if auth state handler hasn't run yet
-                if (!authStateChecked) {
-                    console.log('Checking session manually...');
+                // If form wasn't shown by auth state change, check session manually
+                if (!formShown) {
+                    console.log('No PASSWORD_RECOVERY event received, checking session manually...');
                     const { data: { session }, error } = await supabaseClient.auth.getSession();
 
                     console.log('Manual session check:', { hasSession: !!session, error });
 
+                    if (error) {
+                        console.error('Session error:', error);
+                        showError('Error verifying reset link: ' + error.message);
+                        return;
+                    }
+
                     if (session) {
+                        console.log('Valid session found, showing form');
+                        formShown = true;
                         showForm();
                     } else {
+                        console.error('No session found');
                         showError('The password reset link is invalid or has expired. Please request a new one.');
                     }
                 }
