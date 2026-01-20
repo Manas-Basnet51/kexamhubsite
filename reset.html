@@ -390,10 +390,14 @@
         // Check if we have a valid session on page load
         async function checkResetSession() {
             try {
-                // Check if there's an error in the URL hash
+                // Check for code in query parameters (from email link via index.html redirect)
+                const urlParams = new URLSearchParams(window.location.search);
+                const code = urlParams.get('code');
+
+                // Also check hash parameters (direct links)
                 const hashParams = new URLSearchParams(window.location.hash.substring(1));
-                const errorDescription = hashParams.get('error_description');
-                const errorCode = hashParams.get('error');
+                const errorDescription = hashParams.get('error_description') || urlParams.get('error_description');
+                const errorCode = hashParams.get('error') || urlParams.get('error');
 
                 if (errorDescription || errorCode) {
                     console.error('URL error:', errorDescription || errorCode);
@@ -401,10 +405,35 @@
                     return;
                 }
 
-                console.log('Full URL hash:', window.location.hash);
-                console.log('Parsed hash params:', Object.fromEntries(hashParams.entries()));
+                console.log('URL parameters:', {
+                    queryCode: code,
+                    hash: window.location.hash,
+                    search: window.location.search
+                });
 
-                // Wait for Supabase to process the token from URL and trigger auth state change
+                // If we have a code parameter, exchange it for a session
+                if (code) {
+                    console.log('Found code parameter, exchanging for session...');
+
+                    const { data, error } = await supabaseClient.auth.exchangeCodeForSession(code);
+
+                    console.log('Code exchange result:', { hasSession: !!data?.session, hasUser: !!data?.user, error });
+
+                    if (error) {
+                        console.error('Code exchange error:', error);
+                        showError('The password reset link is invalid or has expired: ' + error.message);
+                        return;
+                    }
+
+                    if (data?.session) {
+                        console.log('Session created from code, showing form');
+                        formShown = true;
+                        showForm();
+                        return;
+                    }
+                }
+
+                // Wait for Supabase to process any hash tokens and trigger auth state change
                 console.log('Waiting for auth state change...');
                 await new Promise(resolve => setTimeout(resolve, 3000));
 
