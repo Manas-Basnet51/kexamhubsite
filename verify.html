@@ -251,8 +251,9 @@
         // Verify email on page load
         async function verifyEmail() {
             try {
-                // Check for code in query parameters (from email link via index.html redirect)
+                // Check for token or code in query parameters (from email link)
                 const urlParams = new URLSearchParams(window.location.search);
+                const token = urlParams.get('token');
                 const code = urlParams.get('code');
 
                 // Also check hash parameters
@@ -265,26 +266,54 @@
                 }
 
                 console.log('Verify email - URL parameters:', {
-                    queryCode: code,
+                    token: token,
+                    code: code,
                     hash: window.location.hash,
                     search: window.location.search
                 });
 
-                // If we have a code parameter, exchange it for a session
-                if (code) {
-                    console.log('Found code parameter, exchanging for session...');
+                // If we have a token parameter, verify it
+                if (token) {
+                    console.log('Found token parameter, verifying...');
 
-                    const { data, error } = await supabaseClient.auth.exchangeCodeForSession(code);
+                    const { data, error } = await supabaseClient.auth.verifyOtp({
+                        token_hash: token,
+                        type: 'signup'
+                    });
 
-                    console.log('Code exchange result:', { hasSession: !!data?.session, hasUser: !!data?.user, error });
+                    console.log('Token verification result:', { hasSession: !!data?.session, hasUser: !!data?.user, error });
 
                     if (error) {
-                        console.error('Code exchange error:', error);
+                        console.error('Token verification error:', error);
                         showError('The verification link is invalid or has expired: ' + error.message);
                         return;
                     }
 
-                    if (data?.session) {
+                    if (data?.session || data?.user) {
+                        console.log('Email verified successfully via token');
+                        showSuccess();
+                        return;
+                    }
+                }
+
+                // Legacy: If we have a code parameter (shouldn't happen with new template)
+                if (code) {
+                    console.log('Found code parameter (legacy), trying to verify...');
+
+                    const { data, error } = await supabaseClient.auth.verifyOtp({
+                        token_hash: code,
+                        type: 'signup'
+                    });
+
+                    console.log('Code verification result:', { hasSession: !!data?.session, hasUser: !!data?.user, error });
+
+                    if (error) {
+                        console.error('Code verification error:', error);
+                        showError('The verification link is invalid or has expired: ' + error.message);
+                        return;
+                    }
+
+                    if (data?.session || data?.user) {
                         console.log('Email verified successfully via code');
                         showSuccess();
                         return;
