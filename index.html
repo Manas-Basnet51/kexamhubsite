@@ -150,11 +150,12 @@
         (function() {
             const urlParams = new URLSearchParams(window.location.search);
             const code = urlParams.get('code');
+            const token = urlParams.get('token');
             const type = urlParams.get('type');
             const hash = window.location.hash;
 
-            // If there's a code parameter, redirect to the appropriate page
-            if (code) {
+            // If there's a code or token parameter, redirect to the appropriate page
+            if (code || token) {
                 // Determine which page to redirect to based on type
                 // Default to reset.html if type is not specified
                 let redirectPage = 'reset.html';
