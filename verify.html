@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Email | kExamHub</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2f27ce;
+            --secondary: #dddbff;
+            --dark-text: #050316;
+            --light-bg: #fbfbfe;
+            --on-primary: #fbfbfe;
+            --surface-low: #f5f5f8;
+            --error: #dc3545;
+            --success: #28a745;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Noto Sans KR', sans-serif; }
+        body { background-color: var(--light-bg); color: var(--dark-text); line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
+
+        /* MINIMAL NAV */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 40px 8%; background: transparent;
+        }
+        .logo { font-size: 1.6rem; font-weight: 900; color: var(--primary); letter-spacing: -1.5px; text-decoration: none; }
+
+        .nav-link {
+            font-weight: 600; font-size: 0.9rem;
+            color: var(--dark-text); opacity: 0.7; text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        .nav-link:hover { opacity: 1; }
+
+        /* HERO SECTION */
+        .hero {
+            padding: 80px 8% 60px;
+            border-bottom: 1px solid var(--secondary);
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900; line-height: 1;
+            letter-spacing: -3px; margin-bottom: 20px;
+        }
+        .hero p { font-size: 1.1rem; max-width: 650px; opacity: 0.7; }
+
+        /* CONTENT SECTION */
+        .content {
+            padding: 80px 8%;
+            max-width: 600px;
+            margin: 0 auto;
+            flex: 1;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 18px 40px;
+            background: var(--primary);
+            color: var(--on-primary);
+            text-decoration: none;
+            border-radius: 32px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border-left: 4px solid var(--success);
+            padding: 30px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+
+        .success-box p {
+            color: #155724;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .success-box .icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .error-box {
+            background: #f8d7da;
+            border-left: 4px solid var(--error);
+            padding: 30px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+
+        .error-box p {
+            color: #721c24;
+            font-weight: 600;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .spinner {
+            border: 4px solid var(--secondary);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .info-box {
+            background: var(--surface-low);
+            padding: 25px;
+            border-radius: 12px;
+            margin-top: 25px;
+        }
+
+        .info-box p {
+            opacity: 0.8;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+
+        .info-box ul {
+            margin-left: 20px;
+            margin-top: 15px;
+        }
+
+        .info-box li {
+            opacity: 0.8;
+            margin-bottom: 8px;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 80px 8%;
+            background: var(--dark-text);
+            color: var(--light-bg);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: auto;
+        }
+
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 2.5rem; }
+            .content { padding: 60px 8%; }
+            footer { flex-direction: column; align-items: flex-start; gap: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">kExamHub</a>
+        <a href="index.html" class="nav-link">Back to Home</a>
+    </nav>
+
+    <header class="hero">
+        <h1>Email Verification</h1>
+        <p>Confirming your email address...</p>
+    </header>
+
+    <main class="content">
+        <!-- Loading State -->
+        <div id="loadingState" class="loading">
+            <div class="spinner"></div>
+            <p style="opacity: 0.7;">Verifying your email address...</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="errorState" class="hidden">
+            <div class="error-box">
+                <p id="errorMessage">The verification link is invalid or has expired.</p>
+            </div>
+            <p style="margin-top: 20px; opacity: 0.7;">Please try signing up again or request a new verification email from the kExamHub app.</p>
+            <a href="index.html" class="btn" style="margin-top: 25px;">Back to Home</a>
+        </div>
+
+        <!-- Success State -->
+        <div id="successState" class="hidden">
+            <div class="success-box">
+                <div class="icon">✓</div>
+                <p style="font-size: 1.2rem; margin-bottom: 15px;">Email Verified Successfully!</p>
+                <p style="opacity: 0.8; font-weight: 400;">Your email has been confirmed. You can now access all features of kExamHub.</p>
+            </div>
+
+            <div class="info-box">
+                <p><strong>Next Steps:</strong></p>
+                <ul>
+                    <li>Open the kExamHub app on your device</li>
+                    <li>Log in with your email and password</li>
+                    <li>Start exploring tests and learning resources</li>
+                </ul>
+            </div>
+
+            <a href="index.html" class="btn" style="margin-top: 25px;">Back to Home</a>
+        </div>
+    </main>
+
+    <footer>
+        <div>
+            <a href="index.html" class="logo" style="color: white; margin-bottom: 20px; display: inline-block;">kExamHub</a>
+            <p style="opacity: 0.5; font-size: 0.8rem; max-width: 300px;">The Professional Examination Hub for Korean Language Aspirants.</p>
+            <p style="margin-top: 15px;"><a href="privacy-policy.html" style="color: var(--secondary); text-decoration: none; font-size: 0.85rem; font-weight: 600;">Privacy Policy</a></p>
+        </div>
+        <div style="text-align: right;">
+            <p style="font-weight: 800; font-size: 1.2rem;">Welcome Aboard!</p>
+            <p style="opacity: 0.5; font-size: 0.8rem;">Verified & Ready to Learn</p>
+        </div>
+    </footer>
+
+    <!-- Supabase JavaScript SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+        // Supabase credentials (same as Flutter app)
+        const SUPABASE_URL = 'https://fwthxnihyrcklssspzon.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_Ruw4C5J--D5Ewr6-4H6q_g_gBjTpu-R';
+
+        // Initialize Supabase client
+        const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // Get DOM elements
+        const loadingState = document.getElementById('loadingState');
+        const errorState = document.getElementById('errorState');
+        const successState = document.getElementById('successState');
+        const errorMessage = document.getElementById('errorMessage');
+
+        // Verify email on page load
+        async function verifyEmail() {
+            try {
+                // Supabase automatically handles the email verification token from the URL hash
+                const { data: { session }, error } = await supabaseClient.auth.getSession();
+
+                if (error) {
+                    throw error;
+                }
+
+                if (!session) {
+                    // Check if there's an error in the URL
+                    const hashParams = new URLSearchParams(window.location.hash.substring(1));
+                    const errorDescription = hashParams.get('error_description');
+
+                    if (errorDescription) {
+                        showError(errorDescription);
+                    } else {
+                        showError('The verification link is invalid or has expired.');
+                    }
+                    return;
+                }
+
+                // Email verified successfully!
+                showSuccess();
+
+                // Optional: Sign out the user since they'll log in via the app
+                // await supabaseClient.auth.signOut();
+            } catch (err) {
+                console.error('Email verification error:', err);
+                showError('An error occurred while verifying your email. Please try again.');
+            }
+        }
+
+        // UI State management
+        function showLoading() {
+            loadingState.classList.remove('hidden');
+            errorState.classList.add('hidden');
+            successState.classList.add('hidden');
+        }
+
+        function showError(message) {
+            errorMessage.textContent = message;
+            loadingState.classList.add('hidden');
+            errorState.classList.remove('hidden');
+            successState.classList.add('hidden');
+        }
+
+        function showSuccess() {
+            loadingState.classList.add('hidden');
+            errorState.classList.add('hidden');
+            successState.classList.remove('hidden');
+        }
+
+        // Initialize page
+        showLoading();
+        verifyEmail();
+    </script>
+
+</body>
+</html>
