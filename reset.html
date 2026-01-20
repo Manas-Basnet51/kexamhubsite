@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Password | kExamHub</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2f27ce;
+            --secondary: #dddbff;
+            --dark-text: #050316;
+            --light-bg: #fbfbfe;
+            --on-primary: #fbfbfe;
+            --surface-low: #f5f5f8;
+            --error: #dc3545;
+            --success: #28a745;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Noto Sans KR', sans-serif; }
+        body { background-color: var(--light-bg); color: var(--dark-text); line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100vh; display: flex; flex-direction: column; }
+
+        /* MINIMAL NAV */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 40px 8%; background: transparent;
+        }
+        .logo { font-size: 1.6rem; font-weight: 900; color: var(--primary); letter-spacing: -1.5px; text-decoration: none; }
+
+        .nav-link {
+            font-weight: 600; font-size: 0.9rem;
+            color: var(--dark-text); opacity: 0.7; text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        .nav-link:hover { opacity: 1; }
+
+        /* HERO SECTION */
+        .hero {
+            padding: 80px 8% 60px;
+            border-bottom: 1px solid var(--secondary);
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            font-weight: 900; line-height: 1;
+            letter-spacing: -3px; margin-bottom: 20px;
+        }
+        .hero p { font-size: 1.1rem; max-width: 650px; opacity: 0.7; }
+
+        /* CONTENT SECTION */
+        .content {
+            padding: 80px 8%;
+            max-width: 600px;
+            margin: 0 auto;
+            flex: 1;
+        }
+
+        .form-container {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid var(--secondary);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+            color: var(--dark-text);
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: 2px solid var(--secondary);
+            border-radius: 12px;
+            font-size: 1rem;
+            font-family: 'Noto Sans KR', sans-serif;
+            transition: border-color 0.2s;
+            background: var(--light-bg);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-group input.error {
+            border-color: var(--error);
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            opacity: 0.6;
+            transition: opacity 0.2s;
+        }
+
+        .toggle-password:hover {
+            opacity: 1;
+        }
+
+        .help-text {
+            font-size: 0.85rem;
+            margin-top: 8px;
+            opacity: 0.7;
+        }
+
+        .error-text {
+            font-size: 0.85rem;
+            color: var(--error);
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 18px 40px;
+            background: var(--primary);
+            color: var(--on-primary);
+            text-decoration: none;
+            border-radius: 32px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: 0.2s;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .highlight-box {
+            background: var(--secondary);
+            padding: 30px;
+            border-radius: 12px;
+            margin: 25px 0;
+        }
+
+        .highlight-box p {
+            opacity: 0.9;
+            margin-bottom: 10px;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border-left: 4px solid var(--success);
+            padding: 25px 30px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+
+        .success-box p {
+            color: #155724;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .error-box {
+            background: #f8d7da;
+            border-left: 4px solid var(--error);
+            padding: 25px 30px;
+            border-radius: 8px;
+            margin: 25px 0;
+        }
+
+        .error-box p {
+            color: #721c24;
+            font-weight: 600;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .spinner {
+            border: 4px solid var(--secondary);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* FOOTER */
+        footer {
+            padding: 80px 8%;
+            background: var(--dark-text);
+            color: var(--light-bg);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: auto;
+        }
+
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 2.5rem; }
+            .content { padding: 60px 8%; }
+            .form-container { padding: 30px 20px; }
+            footer { flex-direction: column; align-items: flex-start; gap: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="index.html" class="logo">kExamHub</a>
+        <a href="index.html" class="nav-link">Back to Home</a>
+    </nav>
+
+    <header class="hero">
+        <h1>Reset Password</h1>
+        <p>Enter your new password to regain access to your kExamHub account.</p>
+    </header>
+
+    <main class="content">
+        <!-- Loading State -->
+        <div id="loadingState" class="loading">
+            <div class="spinner"></div>
+            <p style="opacity: 0.7;">Verifying reset link...</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="errorState" class="hidden">
+            <div class="error-box">
+                <p id="errorMessage">The password reset link is invalid or has expired.</p>
+            </div>
+            <p style="margin-top: 20px; opacity: 0.7;">Please request a new password reset from the kExamHub app.</p>
+            <a href="index.html" class="btn" style="margin-top: 25px; text-decoration: none;">Back to Home</a>
+        </div>
+
+        <!-- Form State -->
+        <div id="formState" class="hidden">
+            <form id="resetForm" class="form-container">
+                <div class="form-group">
+                    <label for="newPassword">New Password</label>
+                    <div class="input-wrapper">
+                        <input
+                            type="password"
+                            id="newPassword"
+                            placeholder="Enter new password"
+                            minlength="8"
+                            required
+                        >
+                        <button type="button" class="toggle-password" data-target="newPassword">
+                            👁️
+                        </button>
+                    </div>
+                    <p class="help-text">Must be at least 8 characters long</p>
+                    <p id="newPasswordError" class="error-text hidden"></p>
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <div class="input-wrapper">
+                        <input
+                            type="password"
+                            id="confirmPassword"
+                            placeholder="Confirm new password"
+                            minlength="8"
+                            required
+                        >
+                        <button type="button" class="toggle-password" data-target="confirmPassword">
+                            👁️
+                        </button>
+                    </div>
+                    <p id="confirmPasswordError" class="error-text hidden"></p>
+                </div>
+
+                <button type="submit" id="submitBtn" class="btn">
+                    Reset Password
+                </button>
+            </form>
+        </div>
+
+        <!-- Success State -->
+        <div id="successState" class="hidden">
+            <div class="success-box">
+                <p style="font-size: 1.1rem; margin-bottom: 15px;">✓ Password Reset Successfully!</p>
+                <p style="opacity: 0.8; font-weight: 400;">You can now log in to the kExamHub app with your new password.</p>
+            </div>
+            <a href="index.html" class="btn" style="margin-top: 25px; text-decoration: none;">Back to Home</a>
+        </div>
+    </main>
+
+    <footer>
+        <div>
+            <a href="index.html" class="logo" style="color: white; margin-bottom: 20px; display: inline-block;">kExamHub</a>
+            <p style="opacity: 0.5; font-size: 0.8rem; max-width: 300px;">The Professional Examination Hub for Korean Language Aspirants.</p>
+            <p style="margin-top: 15px;"><a href="privacy-policy.html" style="color: var(--secondary); text-decoration: none; font-size: 0.85rem; font-weight: 600;">Privacy Policy</a></p>
+        </div>
+        <div style="text-align: right;">
+            <p style="font-weight: 800; font-size: 1.2rem;">Secure & Simple.</p>
+            <p style="opacity: 0.5; font-size: 0.8rem;">Your Account, Your Control</p>
+        </div>
+    </footer>
+
+    <!-- Supabase JavaScript SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+        // Supabase credentials (same as Flutter app)
+        const SUPABASE_URL = 'https://fwthxnihyrcklssspzon.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_Ruw4C5J--D5Ewr6-4H6q_g_gBjTpu-R';
+
+        // Initialize Supabase client
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // Get DOM elements
+        const loadingState = document.getElementById('loadingState');
+        const errorState = document.getElementById('errorState');
+        const formState = document.getElementById('formState');
+        const successState = document.getElementById('successState');
+        const resetForm = document.getElementById('resetForm');
+        const newPasswordInput = document.getElementById('newPassword');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const submitBtn = document.getElementById('submitBtn');
+        const errorMessage = document.getElementById('errorMessage');
+        const newPasswordError = document.getElementById('newPasswordError');
+        const confirmPasswordError = document.getElementById('confirmPasswordError');
+
+        // Show/hide password toggles
+        document.querySelectorAll('.toggle-password').forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.getAttribute('data-target');
+                const input = document.getElementById(targetId);
+
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    button.textContent = '🙈';
+                } else {
+                    input.type = 'password';
+                    button.textContent = '👁️';
+                }
+            });
+        });
+
+        // Check if we have a valid session on page load
+        async function checkResetSession() {
+            try {
+                // Supabase automatically handles the password reset token from the URL
+                const { data: { session }, error } = await supabase.auth.getSession();
+
+                if (error || !session) {
+                    showError('The password reset link is invalid or has expired.');
+                    return;
+                }
+
+                // Valid session - show the form
+                showForm();
+            } catch (err) {
+                console.error('Session check error:', err);
+                showError('An error occurred while verifying your reset link. Please try again.');
+            }
+        }
+
+        // Validate passwords
+        function validatePasswords() {
+            let isValid = true;
+
+            // Clear previous errors
+            newPasswordError.classList.add('hidden');
+            confirmPasswordError.classList.add('hidden');
+            newPasswordInput.classList.remove('error');
+            confirmPasswordInput.classList.remove('error');
+
+            const newPassword = newPasswordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+
+            // Check new password length
+            if (newPassword.length < 8) {
+                newPasswordError.textContent = 'Password must be at least 8 characters long';
+                newPasswordError.classList.remove('hidden');
+                newPasswordInput.classList.add('error');
+                isValid = false;
+            }
+
+            // Check if passwords match
+            if (newPassword !== confirmPassword) {
+                confirmPasswordError.textContent = 'Passwords do not match';
+                confirmPasswordError.classList.remove('hidden');
+                confirmPasswordInput.classList.add('error');
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        // Handle form submission
+        resetForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (!validatePasswords()) {
+                return;
+            }
+
+            // Disable form during submission
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<div class="spinner" style="width: 20px; height: 20px; border-width: 2px; margin: 0;"></div> Resetting...';
+            newPasswordInput.disabled = true;
+            confirmPasswordInput.disabled = true;
+
+            try {
+                const newPassword = newPasswordInput.value;
+
+                // Update the user's password
+                const { error } = await supabase.auth.updateUser({
+                    password: newPassword
+                });
+
+                if (error) {
+                    throw error;
+                }
+
+                // Success!
+                showSuccess();
+            } catch (err) {
+                console.error('Password reset error:', err);
+
+                // Re-enable form
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Reset Password';
+                newPasswordInput.disabled = false;
+                confirmPasswordInput.disabled = false;
+
+                // Show error
+                alert('Failed to reset password: ' + (err.message || 'Unknown error. Please try again.'));
+            }
+        });
+
+        // Real-time validation
+        confirmPasswordInput.addEventListener('input', () => {
+            if (confirmPasswordInput.value.length > 0) {
+                validatePasswords();
+            }
+        });
+
+        // UI State management
+        function showLoading() {
+            loadingState.classList.remove('hidden');
+            errorState.classList.add('hidden');
+            formState.classList.add('hidden');
+            successState.classList.add('hidden');
+        }
+
+        function showError(message) {
+            errorMessage.textContent = message;
+            loadingState.classList.add('hidden');
+            errorState.classList.remove('hidden');
+            formState.classList.add('hidden');
+            successState.classList.add('hidden');
+        }
+
+        function showForm() {
+            loadingState.classList.add('hidden');
+            errorState.classList.add('hidden');
+            formState.classList.remove('hidden');
+            successState.classList.add('hidden');
+        }
+
+        function showSuccess() {
+            loadingState.classList.add('hidden');
+            errorState.classList.add('hidden');
+            formState.classList.add('hidden');
+            successState.classList.remove('hidden');
+        }
+
+        // Initialize page
+        showLoading();
+        checkResetSession();
+    </script>
+
+</body>
+</html>
