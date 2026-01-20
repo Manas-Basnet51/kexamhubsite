@@ -374,15 +374,49 @@
         // Check if we have a valid session on page load
         async function checkResetSession() {
             try {
-                // Supabase automatically handles the password reset token from the URL
+                // Check if there's an error in the URL hash
+                const hashParams = new URLSearchParams(window.location.hash.substring(1));
+                const errorDescription = hashParams.get('error_description');
+                const errorCode = hashParams.get('error');
+
+                if (errorDescription || errorCode) {
+                    console.error('URL error:', errorDescription || errorCode);
+                    showError(errorDescription || 'The password reset link is invalid or has expired.');
+                    return;
+                }
+
+                // Check if we have the necessary parameters
+                const accessToken = hashParams.get('access_token');
+                const type = hashParams.get('type');
+
+                if (!accessToken || type !== 'recovery') {
+                    console.error('Missing parameters:', { accessToken: !!accessToken, type });
+                    showError('The password reset link is invalid. Please request a new password reset.');
+                    return;
+                }
+
+                // Wait a moment for Supabase to process the token
+                await new Promise(resolve => setTimeout(resolve, 500));
+
+                // Check session
                 const { data: { session }, error } = await supabase.auth.getSession();
 
-                if (error || !session) {
-                    showError('The password reset link is invalid or has expired.');
+                console.log('Session check:', { hasSession: !!session, error });
+
+                if (error) {
+                    console.error('Session error:', error);
+                    showError('Error verifying reset link: ' + error.message);
+                    return;
+                }
+
+                if (!session) {
+                    console.error('No session found');
+                    showError('The password reset link is invalid or has expired. Please request a new one.');
                     return;
                 }
 
                 // Valid session - show the form
+                console.log('Valid session found, showing form');
                 showForm();
             } catch (err) {
                 console.error('Session check error:', err);
