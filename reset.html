@@ -386,37 +386,40 @@
                 }
 
                 // Check if we have the necessary parameters
-                const accessToken = hashParams.get('access_token');
+                const tokenHash = hashParams.get('access_token');
                 const type = hashParams.get('type');
 
-                if (!accessToken || type !== 'recovery') {
-                    console.error('Missing parameters:', { accessToken: !!accessToken, type });
+                console.log('URL parameters:', { hasTokenHash: !!tokenHash, type, tokenHashLength: tokenHash?.length });
+
+                if (!tokenHash || type !== 'recovery') {
+                    console.error('Missing parameters:', { hasTokenHash: !!tokenHash, type });
                     showError('The password reset link is invalid. Please request a new password reset.');
                     return;
                 }
 
-                // Wait a moment for Supabase to process the token
-                await new Promise(resolve => setTimeout(resolve, 500));
+                // Verify the OTP token
+                console.log('Verifying OTP token...');
+                const { data, error } = await supabaseClient.auth.verifyOtp({
+                    token_hash: tokenHash,
+                    type: 'recovery'
+                });
 
-                // Check session
-                const { data: { session }, error } = await supabaseClient.auth.getSession();
-
-                console.log('Session check:', { hasSession: !!session, error });
+                console.log('Verify OTP result:', { hasSession: !!data?.session, hasUser: !!data?.user, error });
 
                 if (error) {
-                    console.error('Session error:', error);
-                    showError('Error verifying reset link: ' + error.message);
+                    console.error('Verification error:', error);
+                    showError('The password reset link is invalid or has expired: ' + error.message);
                     return;
                 }
 
-                if (!session) {
-                    console.error('No session found');
-                    showError('The password reset link is invalid or has expired. Please request a new one.');
+                if (!data?.session) {
+                    console.error('No session created');
+                    showError('Failed to verify reset link. Please request a new password reset.');
                     return;
                 }
 
                 // Valid session - show the form
-                console.log('Valid session found, showing form');
+                console.log('Valid session created, showing form');
                 showForm();
             } catch (err) {
                 console.error('Session check error:', err);
